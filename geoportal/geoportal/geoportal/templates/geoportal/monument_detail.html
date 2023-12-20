@@ -1,0 +1,104 @@
+{% extends 'geoportal/base.html' %}
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+<div class="monument-detail">
+
+    {% if object.image %}
+        <div class="hero-image" style="background-image: url('{{ object.image.url }}');"></div>
+    {% endif %}
+
+    <div class="container mt-4">
+        <h1 class="display-4 mb-3">{{ object.name }}</h1>
+
+        <div class="row">
+            <div class="col-md-8">
+                <p class="lead">{{ object.description }}</p>
+                <p><strong>Тип:</strong> {{ object.get_monument_type_display }}</p>
+                <p><strong>Дата заснування:</strong> {{ object.foundation_date }}</p>
+                <p><strong>Локація:</strong> {{ object.location }}</p>
+            </div>
+            <div class="col-md-4">
+                <div id="viewDiv" style="width: 100%; height: 300px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block head %}
+<style>
+    .hero-image {
+        background-size: cover;
+        background-position: center;
+        height: 400px;
+    }
+    .monument-detail .lead {
+        font-size: 1.2rem;
+    }
+</style>
+{% endblock %}
+
+
+{% block scripts %}
+<link rel="stylesheet" href="https://js.arcgis.com/4.28/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.28/"></script>
+<script data-latitude="{{ object.latitude }}" data-longitude="{{ object.longitude }}">
+    const data = document.currentScript.dataset;
+    const latitude = parseFloat(data.latitude.replace(',', '.'));
+    const longitude = parseFloat(data.longitude.replace(',', '.'));
+
+    require([
+      "esri/config",
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/intl",
+      "esri/Graphic",
+      "esri/layers/GraphicsLayer"
+    ], function(esriConfig, Map, MapView, intl, Graphic, GraphicsLayer) {
+
+      esriConfig.apiKey = "AAPKc617a5ca3de44ef5bdbd41c603cf3d46DplkjDiY4-y1Gw-gv8jVmA8c3qwhUtDaVH_iLVMfL_uZICsaHZh4AtVKneftlTmW" // my API key
+    
+      var map = new Map({
+        basemap: {
+            style: {
+                id: "arcgis/navigation",
+                language: "uk"
+            }
+        }
+      });
+
+      intl.setLocale("uk");
+
+      const graphicsLayer = new GraphicsLayer();
+      map.add(graphicsLayer);
+
+      const point = { //Create a point
+        type: "point",
+        longitude: longitude,
+        latitude: latitude
+      };
+      const simpleMarkerSymbol = {
+          type: "simple-marker",
+          color: [226, 119, 40],  // Orange
+          outline: {
+              color: [255, 255, 255], // White
+              width: 1
+          }
+      };
+
+      const pointGraphic = new Graphic({
+        geometry: point,
+        symbol: simpleMarkerSymbol
+      });
+      graphicsLayer.add(pointGraphic);
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [longitude, latitude], // Longitude, Latitude
+        zoom: 15
+      });
+     });
+    </script>
+{% endblock %}
