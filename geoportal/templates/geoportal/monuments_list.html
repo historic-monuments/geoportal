@@ -4,6 +4,7 @@
 {% block title %}Цікаві місця{% endblock %}
 
 {% block content %}
+{% load static %}
 <div class="container my-4">
     <h1 class="mb-4">Цікаві місця</h1>
     <div class="row">
@@ -11,7 +12,7 @@
         <div class="col-md-6 col-lg-4 mb-3">
             <div class="card h-100">
                 {% if monument.image %}
-                <img src="{{ monument.image.url }}" class="card-img-top" alt="{{ monument.name }}">
+                <img src="{% static monument.image.url %}" class="card-img-top" alt="{{ monument.name }}">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">

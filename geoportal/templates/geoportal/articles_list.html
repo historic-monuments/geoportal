@@ -2,6 +2,8 @@
 {% block title %}Останні публікації{% endblock %}
 
 {% block content %}
+{% load static %}
+
 <div class="container my-4">
     <h1 class="mb-4">Новини та цікаві статті</h1>
     <div class="row">
@@ -9,7 +11,7 @@
         <div class="col-md-4 mb-3">
             <div class="card h-100">
                 {% if article.image %}
-                <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+                <img src="{% static article.image.url %}" class="card-img-top" alt="{{ article.title }}">
                 {% endif %}
                 <div class="card-body">
                     <h5 class="card-title"><a href="{% url 'article_detail' article.id %}" class="stretched-link">{{ article.title }}</a></h5>
