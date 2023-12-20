@@ -1,0 +1,40 @@
+{% extends 'geoportal/base.html' %}
+{% load custom_filters %}
+
+{% block title %}Цікаві місця{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+    <h1 class="mb-4">Цікаві місця</h1>
+    <div class="row">
+        {% for monument in object_list %}
+        <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card h-100">
+                {% if monument.image %}
+                <img src="{{ monument.image.url }}" class="card-img-top" alt="{{ monument.name }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'monument_detail' monument.id %}" class="stretched-link">{{ monument.name }}</a>
+                    </h5>
+                    <p class="card-text">{{ monument.description|first_sentence }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block head %}
+<style>
+    .card-img-top {
+        height: 200px; /* Fixed height */
+        object-fit: cover; /* This will ensure the image covers the area nicely */
+    }
+    .card {
+        height: 100%; /* Make sure cards are equal height */
+    }
+</style>
+{% endblock %}
+
