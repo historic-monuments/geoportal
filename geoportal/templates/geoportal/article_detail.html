@@ -4,9 +4,8 @@
 {% block content %}
 <div class="article-detail">
 
-    {% load static %}
     {% if object.image %}
-        <div class="hero-image" style="background-image: url('{% static object.image.url %}');">
+        <div class="hero-image" style="background-image: url('{{ object.image.url }}');">
             <!-- Hero Image -->
         </div>
     {% endif %}
