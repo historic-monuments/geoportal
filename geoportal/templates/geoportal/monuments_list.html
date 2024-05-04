@@ -5,7 +5,7 @@
 
 {% block content %}
 <div class="container my-4">
-    <h1 class="mb-4">Цікаві місця</h1>
+    <h1 class="mb-4">{% block subtitle %}Цікаві місця{% endblock %}</h1>
     <div class="row">
         {% for monument in object_list %}
         <div class="col-md-6 col-lg-4 mb-3">

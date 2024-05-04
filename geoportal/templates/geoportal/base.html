@@ -17,9 +17,14 @@
               <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Головна</a>
                 <a class="nav-link" href="{% url 'monuments_list' %}">Цікаві місця</a>
+                <a class="nav-link" href="{% url 'map' %}">Карта пам'яток</a>
                 <a class="nav-link" href="{% url 'about' %}">Про геопортал</a>
               </div>
             </div>
+              <form class="d-flex" role="search" action="{% url 'search_results' %}" method="get">
+                <input name="q" class="form-control me-2" type="search" placeholder="Знайти пам'ятку" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Пошук</button>
+              </form>
           </div>
       </nav>
   </head>

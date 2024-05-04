@@ -1,0 +1,37 @@
+{% extends 'geoportal/base.html' %}
+{% block title %}Карта пам'яток{% endblock %}
+
+{% block head %}
+<script src='https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css' rel='stylesheet' />
+
+<style>
+.map #map {
+	width: 100%;
+	height: 800px;
+	margin-top: 20px
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="map">
+    <div class="container my-4">
+        <h1 class="mb-4">Карта пам'яток</h1>
+        <div id="map"></div>
+</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoibXNha2hhcmNodWsiLCJhIjoiY2wzd3phODllMGYxNTNicXRxa211b2wxaiJ9.jv5LKBWZtTxuzt4b6YY2BA';
+         const map = new mapboxgl.Map({
+             container: 'map', // container ID
+             style: 'mapbox://styles/msakharchuk/cl4g1hygt000515o2k6p2vf3k', // style URL
+             center: [32.704, 51.344], // starting position [lng, lat]
+             zoom: 6.8 // starting zoom
+
+         });
+  </script>
+{% endblock %}

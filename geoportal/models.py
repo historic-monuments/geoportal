@@ -17,7 +17,7 @@ class Article(models.Model):
 
 class Monument(models.Model):
     MONUMENT_TYPES = [
-        ('art', 'Мистецство'),
+        ('art', 'Мистецтво'),
         ('history', 'Історія'),
         ('architecture', 'Архітектура'),
         ('archeology', 'Археологія'),
