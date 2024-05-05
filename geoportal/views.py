@@ -11,9 +11,31 @@ def about(request):
 def mapView(request):
     return render(request, 'geoportal/map.html')
 
+
 class MonumentListView(ListView):
     model = Monument
     template_name = 'geoportal/monuments_list.html'
+    TRANSLATION_MAP = {
+        'history': "Історичні об'єкти культурної спадщини",
+        'architecture': 'Споруди культового призначення',
+        'archeology': "Археологічні об'єкти культурної спадщини",
+        'reservation': 'Державні історико-культурні заповідники та музеї',
+    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        monument_type = self.kwargs.get('type')
+        translation = self.TRANSLATION_MAP.get(monument_type, "Історичні пам'ятки")
+        context['monument_type'] = translation
+        return context
+
+    def get_queryset(self):
+        monument_type = self.kwargs.get("type")
+        if monument_type:
+            return Monument.objects.filter(Q(monument_type__icontains=monument_type.lower()))
+        else:
+            return Monument.objects.all()
+
 
 class MonumentDetailView(DetailView):
     model = Monument

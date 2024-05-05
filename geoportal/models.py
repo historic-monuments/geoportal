@@ -17,11 +17,10 @@ class Article(models.Model):
 
 class Monument(models.Model):
     MONUMENT_TYPES = [
-        ('art', 'Мистецтво'),
-        ('history', 'Історія'),
-        ('architecture', 'Архітектура'),
-        ('archeology', 'Археологія'),
-        ('reservation', 'Заповідник'),
+        ('history', "Історичні об'єкти культурної спадщини"),
+        ('architecture', 'Споруди культового призначення'),
+        ('archeology', "Археологічні об'єкти культурної спадщини"),
+        ('reservation', 'Державні історико-культурні заповідники та музеї'),
     ]
 
     name = models.CharField("Назва", max_length=200)

@@ -14,12 +14,22 @@
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Головна</a>
-                <a class="nav-link" href="{% url 'monuments_list' %}">Цікаві місця</a>
-                <a class="nav-link" href="{% url 'map' %}">Карта пам'яток</a>
-                <a class="nav-link" href="{% url 'about' %}">Про геопортал</a>
-              </div>
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" aria-current="page" href="{% url 'index' %}">Головна</a></li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Історичні пам'ятки
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'monuments_list' 'history' %}">Історичні об'єкти культурної спадщини</a></li>
+                    <li><a class="dropdown-item" href="{% url 'monuments_list' 'architecture' %}">Споруди культового призначення</a></li>
+                    <li><a class="dropdown-item" href="{% url 'monuments_list' 'archeology' %}">Археологічні об'єкти культурної спадщини</a></li>
+                    <li><a class="dropdown-item" href="{% url 'monuments_list' 'reservation'%}">Державні історико-культурні заповідники та музеї</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'map' %}">Карта пам'яток</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Про геопортал</a></li>
+              </ul>
             </div>
               <form class="d-flex" role="search" action="{% url 'search_results' %}" method="get">
                 <input name="q" class="form-control me-2" type="search" placeholder="Знайти пам'ятку" aria-label="Search">
@@ -35,7 +45,7 @@
       
     <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
-        <span class="text-center text-muted">© 2023: Розроблено Сахарчук Марією</span>
+        <span class="text-center text-muted">© 2024: Розроблено Сахарчук Марією</span>
     </div>
     </footer>
 

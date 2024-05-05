@@ -7,6 +7,7 @@ from .views import (MonumentListView, MonumentDetailView, ArticleListView,
 urlpatterns = [
     path("", ArticleListView.as_view(), name="index"),
     path('monuments/', MonumentListView.as_view(), name='monuments_list'),
+    path('monuments/<str:type>', MonumentListView.as_view(), name='monuments_list'),
     path('monuments/<int:pk>/', MonumentDetailView.as_view(), name='monument_detail'),
     path("search/", SearchResultsView.as_view(), name="search_results"),
     path('articles/', ArticleListView.as_view(), name='articles_list'),

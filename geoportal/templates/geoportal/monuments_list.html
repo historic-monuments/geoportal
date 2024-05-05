@@ -1,11 +1,11 @@
 {% extends 'geoportal/base.html' %}
 {% load custom_filters %}
 
-{% block title %}Цікаві місця{% endblock %}
+{% block title %}{{ monument_type }}{% endblock %}
 
 {% block content %}
 <div class="container my-4">
-    <h1 class="mb-4">{% block subtitle %}Цікаві місця{% endblock %}</h1>
+    <h1 class="mb-4">{% block subtitle %}{{ monument_type }}{% endblock %}</h1>
     <div class="row">
         {% for monument in object_list %}
         <div class="col-md-6 col-lg-4 mb-3">
@@ -21,6 +21,8 @@
                 </div>
             </div>
         </div>
+        {% empty %}
+            <p>Секція ще не заповнена. Зверніться будь-ласка до Марисі щоб не пасочки наминала а заповнила</p>
         {% endfor %}
     </div>
 </div>
