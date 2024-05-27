@@ -6,7 +6,10 @@
 *.log
 *.pot
 *.pyc
-__pycache__/
+geoportal/__pycache__/
+configs/__pycache__/
+geoportal/templatetags/__pycache__/
+geoportal/migrations/__pycache__/
 local_settings.py
 media
 
